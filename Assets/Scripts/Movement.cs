@@ -47,6 +47,7 @@ public class Movement : MonoBehaviour
         float x = UnityEngine.Input.GetAxis("Horizontal");
         float z = UnityEngine.Input.GetAxis("Vertical");
 
+        // Below is old shitty movement, remove the comments for peak shitness
         /*Vector3 move = new Vector3(x, 0f, z) * Speed;
         Vector3 velocity = rb.linearVelocity;
         velocity.x = move.x;
