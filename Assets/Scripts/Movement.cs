@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
     Vector2 look;
     [SerializeField] private Transform camTransform;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform flashTransform;
+    [SerializeField] private float flashSpeed;
 
     //Old input system stuff
     private float horizontal;
@@ -39,6 +41,11 @@ public class Movement : MonoBehaviour
         look.y = Mathf.Clamp(look.y, -89f, 89f);
         playerTransform.localRotation = Quaternion.Euler(0, look.x, 0);
         camTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+
+        // Flashlight rotation
+        /*Mathf.Clamp(look.y * flashSpeed, -89f, 89f);
+        Mathf.Clamp(look.x * flashSpeed, -89f, 89f);
+        flashTransform.localRotation = Quaternion.Euler(look.y * flashSpeed, look.x * flashSpeed, 0);*/
     }
 
     void FixedUpdate()

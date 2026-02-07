@@ -477,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f2f98b66a2f484439a08b8183bdc460, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f2f98b66a2f484439a08b8183bdc460, type: 3}
       propertyPath: m_LocalRotation.y
@@ -551,6 +551,8 @@ MonoBehaviour:
   MouseSensitivityY: 1
   camTransform: {fileID: 1823688467}
   playerTransform: {fileID: 401661523}
+  flashTransform: {fileID: 1913212025}
+  flashSpeed: 1.5
 --- !u!4 &996947039
 Transform:
   m_ObjectHideFlags: 0
