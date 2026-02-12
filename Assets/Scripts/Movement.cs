@@ -16,8 +16,6 @@ public class Movement : MonoBehaviour
     Vector2 look;
     [SerializeField] private Transform camTransform;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private Transform flashTransform;
-    [SerializeField] private float flashSpeed;
 
     private void Start()
     {
