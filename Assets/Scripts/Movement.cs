@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float JumpForce;
     [SerializeField] private float Speed;
+    [SerializeField] private float SprintMultiplier = 1f;
     [SerializeField] private float moveSpeed;
     public bool crawl;
 
@@ -16,14 +17,12 @@ public class Movement : MonoBehaviour
     Vector2 look;
     [SerializeField] private Transform camTransform;
     [SerializeField] private Transform playerTransform;
-<<<<<<< HEAD
-=======
 
     //Old input system stuff
     private float horizontal;
     private float vertical;
     Vector3 moveDirections;
->>>>>>> parent of 27d3820 (idk)
+
 
     private void Start()
     {
@@ -44,6 +43,16 @@ public class Movement : MonoBehaviour
         look.y = Mathf.Clamp(look.y, -89f, 89f);
         playerTransform.localRotation = Quaternion.Euler(0, look.x, 0);
         camTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+
+        //Actual attempt at sprinting
+        if (UnityEngine.Input.GetKey(KeyCode.LeftShift))
+        {
+            SprintMultiplier = 1.5f;
+        }
+        else
+        {
+            SprintMultiplier = 1f;
+        }
     }
 
     void FixedUpdate()
@@ -53,12 +62,12 @@ public class Movement : MonoBehaviour
         float z = UnityEngine.Input.GetAxis("Vertical");
 
         Vector3 move =
-            playerTransform.forward * z +
-            playerTransform.right * x;
+            playerTransform.forward * z * SprintMultiplier +
+            playerTransform.right * x * SprintMultiplier;
         move *= Speed;
 
         Vector3 velocity = rb.linearVelocity;
-        Vector3 movevelocity = new Vector3(move.x, 0, move.z);
+        Vector3 movevelocity = new Vector3(move.x, velocity.y, move.z);
         rb.linearVelocity = movevelocity;
     }
 
