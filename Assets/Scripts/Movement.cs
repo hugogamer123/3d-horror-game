@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
 
     Vector2 look;
     [SerializeField] private Transform camTransform;
+    [SerializeField] private Transform camTransformoffset;
     [SerializeField] private Transform playerTransform;
 
     //Old input system stuff
@@ -53,6 +54,8 @@ public class Movement : MonoBehaviour
         {
             SprintMultiplier = 1f;
         }
+
+
     }
 
     void FixedUpdate()
