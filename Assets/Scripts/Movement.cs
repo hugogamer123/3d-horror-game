@@ -16,6 +16,14 @@ public class Movement : MonoBehaviour
     Vector2 look;
     [SerializeField] private Transform camTransform;
     [SerializeField] private Transform playerTransform;
+<<<<<<< HEAD
+=======
+
+    //Old input system stuff
+    private float horizontal;
+    private float vertical;
+    Vector3 moveDirections;
+>>>>>>> parent of 27d3820 (idk)
 
     private void Start()
     {
