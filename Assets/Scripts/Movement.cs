@@ -7,7 +7,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float JumpForce;
     [SerializeField] private float Speed;
-    
+    [SerializeField] private float moveSpeed;
+    public bool crawl;
+
     [SerializeField] private float MouseSensitivityX = 1;
     [SerializeField] private float MouseSensitivityY = 1;
 
@@ -16,11 +18,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform flashTransform;
     [SerializeField] private float flashSpeed;
-
-    //Old input system stuff
-    private float horizontal;
-    private float vertical;
-    Vector3 moveDirections;
 
     private void Start()
     {
@@ -41,11 +38,6 @@ public class Movement : MonoBehaviour
         look.y = Mathf.Clamp(look.y, -89f, 89f);
         playerTransform.localRotation = Quaternion.Euler(0, look.x, 0);
         camTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
-
-        // Flashlight rotation
-        /*Mathf.Clamp(look.y * flashSpeed, -89f, 89f);
-        Mathf.Clamp(look.x * flashSpeed, -89f, 89f);
-        flashTransform.localRotation = Quaternion.Euler(look.y * flashSpeed, look.x * flashSpeed, 0);*/
     }
 
     void FixedUpdate()
@@ -54,22 +46,14 @@ public class Movement : MonoBehaviour
         float x = UnityEngine.Input.GetAxis("Horizontal");
         float z = UnityEngine.Input.GetAxis("Vertical");
 
-        // Below is old shitty movement, remove the comments for peak shitness
-        /*Vector3 move = new Vector3(x, 0f, z) * Speed;
-        Vector3 velocity = rb.linearVelocity;
-        velocity.x = move.x;
-        velocity.z = move.z;
-
-        Vector3 worldMove = transform.TransformVector(move.x, 0, move.z);
-
-        rb.linearVelocity = velocity worldMove * Speed; */
-
         Vector3 move =
             playerTransform.forward * z +
             playerTransform.right * x;
         move *= Speed;
 
         Vector3 velocity = rb.linearVelocity;
-        rb.linearVelocity = new Vector3(move.x, velocity.y, move.z);
+        Vector3 movevelocity = new Vector3(move.x, 0, move.z);
+        rb.linearVelocity = movevelocity;
     }
+
 }
