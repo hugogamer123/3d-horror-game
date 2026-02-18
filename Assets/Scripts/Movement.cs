@@ -32,10 +32,14 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        bool isGrounded = Physics.Raycast(playerTransform.position, Vector3.down, playerTransform.localScale.y / 2 + 0.8f);
         // Jump input (old input system)
-        if (UnityEngine.Input.GetButtonDown("Jump"))
+        if (isGrounded)
         {
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            if (UnityEngine.Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
         }
 
         look.x += UnityEngine.Input.GetAxis("Mouse X") * MouseSensitivityX;
@@ -54,9 +58,6 @@ public class Movement : MonoBehaviour
         {
             SprintMultiplier = 1f;
         }
-        bool isGrounded = Physics.Raycast(playerTransform.position, Vector3.down, playerTransform.localScale.y / 2 + 0.1f);
-        Debug.Log(isGrounded);
-
     }
 
     void FixedUpdate()
@@ -75,9 +76,6 @@ public class Movement : MonoBehaviour
         rb.linearVelocity = movevelocity;
     }
 
-    void OnCollisionStay()
-    {
-        
-    }
+
 
 }
