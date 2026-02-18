@@ -54,7 +54,8 @@ public class Movement : MonoBehaviour
         {
             SprintMultiplier = 1f;
         }
-
+        bool isGrounded = Physics.Raycast(playerTransform.position, Vector3.down, playerTransform.localScale.y / 2 + 0.1f);
+        Debug.Log(isGrounded);
 
     }
 
@@ -72,6 +73,11 @@ public class Movement : MonoBehaviour
         Vector3 velocity = rb.linearVelocity;
         Vector3 movevelocity = new Vector3(move.x, velocity.y, move.z);
         rb.linearVelocity = movevelocity;
+    }
+
+    void OnCollisionStay()
+    {
+        
     }
 
 }
