@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject MenuUI;
-    [SerializeField] private Slider mouseXslider;
-    [SerializeField] private Slider mouseYslider;
-    bool IsPaused;
+    [SerializeField] public Slider mouseXslider;
+    [SerializeField] public Slider mouseYslider;
+    public bool IsPaused;
 
     void Awake()
     {
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     }
     void Update()
     {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetKeyDown(KeyCode.Q))
         {
             MenuUI.SetActive(!MenuUI.activeSelf);
             IsPaused = MenuUI.activeSelf;
@@ -35,5 +35,16 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+
+        if(IsPaused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Debug.Log("Mouse X Sensitivity: " + mouseXslider.value);
+        Debug.Log("Mouse Y Sensitivity: " + mouseYslider.value);
     }
 }

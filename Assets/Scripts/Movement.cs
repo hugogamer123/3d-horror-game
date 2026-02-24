@@ -19,6 +19,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform camTransformoffset;
     [SerializeField] private Transform playerTransform;
 
+    [SerializeField] private PauseMenu pauseMenu;
+
     //Old input system stuff
     private float horizontal;
     private float vertical;
@@ -32,6 +34,9 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        MouseSensitivityX = pauseMenu.mouseXslider.value;
+        MouseSensitivityY = pauseMenu.mouseYslider.value;
+
         bool isGrounded = Physics.Raycast(playerTransform.position, Vector3.down, playerTransform.localScale.y / 2 + 0.8f);
         // Jump input (old input system)
         if (isGrounded)
@@ -42,12 +47,19 @@ public class Movement : MonoBehaviour
             }
         }
 
-        look.x += UnityEngine.Input.GetAxis("Mouse X") * MouseSensitivityX;
-        look.y += UnityEngine.Input.GetAxis("Mouse Y") * MouseSensitivityY;
+        if (!pauseMenu.IsPaused)
+        {
+            look.x += UnityEngine.Input.GetAxis("Mouse X") * MouseSensitivityX;
+            look.y += UnityEngine.Input.GetAxis("Mouse Y") * MouseSensitivityY;
 
-        look.y = Mathf.Clamp(look.y, -89f, 89f);
-        playerTransform.localRotation = Quaternion.Euler(0, look.x, 0);
-        camTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+            look.y = Mathf.Clamp(look.y, -89f, 89f);
+            playerTransform.localRotation = Quaternion.Euler(0, look.x, 0);
+            camTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+        }
+        else
+        {
+            return;
+        }
 
         //Actual attempt at sprinting
         if (UnityEngine.Input.GetKey(KeyCode.LeftShift))
